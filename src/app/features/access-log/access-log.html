@@ -1,0 +1,12 @@
+<section class="access-log">
+  <app-section-head tag="01" title="access_log — experience & education"></app-section-head>
+
+  @for (entry of entries(); track entry.id) {
+    <div class="log-line">
+      <div class="log-ts">{{ entry.dateRange }}</div>
+      <div class="log-body"><b>{{ entry.title }}</b> — {{ entry.description }}</div>
+    </div>
+  } @empty {
+    <p>No experience entries returned.</p>
+  }
+</section>

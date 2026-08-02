@@ -1,0 +1,23 @@
+<section class="clearance-section">
+  <div class="section-head">
+    <span class="tag">03</span>
+    <h2>clearance_level — skills</h2>
+    <div class="rule"></div>
+  </div>
+
+  <div class="clear-grid">
+    @for (group of groupedSkills(); track group.category) {
+      <div class="clear-card">
+        <div class="cat">{{ group.category }}</div>
+        @for (skill of group.items; track skill.id) {
+          <div class="gauge-row">
+            <span class="gauge-label">{{ skill.name }}</span>
+            <div class="gauge-track">
+              <div class="gauge-fill" [style.width.%]="skill.proficiency"></div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

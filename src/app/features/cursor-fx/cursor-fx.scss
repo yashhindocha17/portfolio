@@ -1,0 +1,29 @@
+.reticle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+
+.ring {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 1px solid #3FE0A5;
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: #3FE0A5;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #3FE0A5;
+}

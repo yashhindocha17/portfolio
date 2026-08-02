@@ -1,0 +1,21 @@
+<section class="contact">
+  <h2 class="contact__heading">Get in touch</h2>
+
+  @if (success()) {
+    <p class="contact__success">Message sent — I'll get back to you soon.</p>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()" class="contact__form">
+      <input formControlName="name" placeholder="name" />
+      <input formControlName="email" placeholder="email" type="email" />
+      <textarea formControlName="message" placeholder="message" rows="5"></textarea>
+
+      @if (error()) {
+        <p class="contact__error">Something went wrong — try again.</p>
+      }
+
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'sending...' : 'send_message →' }}
+      </button>
+    </form>
+  }
+</section>

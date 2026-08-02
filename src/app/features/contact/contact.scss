@@ -1,0 +1,65 @@
+.contact {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+
+.contact__label {
+  font-family: monospace;
+  color: #5a6270;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.contact__heading {
+  color: white;
+  font-size: 32px;
+  margin-bottom: 32px;
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  input, textarea {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+
+    &:focus {
+      outline: none;
+      border-color: #2ecc71;
+    }
+  }
+
+  button {
+    background: #2ecc71;
+    color: black;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    cursor: pointer;
+    font-family: monospace;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.contact__success {
+  color: #2ecc71;
+  font-family: monospace;
+}
+
+.contact__error {
+  color: #ff6b6b;
+  font-size: 13px;
+}
