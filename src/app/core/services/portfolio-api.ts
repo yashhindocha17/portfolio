@@ -36,8 +36,8 @@ export interface ContactRequest {
 @Service()
 export class PortfolioApi {
     private http = inject(HttpClient);
-    private baseUrl = 'http://localhost:5089/api';
-    // private baseUrl = environment.apiUrl;
+    // private baseUrl = 'http://localhost:5089/api';
+    private baseUrl = environment.apiUrl;
 
   getProjects() {
     return this.http.get<Project[]>(`${this.baseUrl}/Projects`);
