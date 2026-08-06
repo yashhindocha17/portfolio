@@ -1,12 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
+import { environment } from '../../../environments/environment.prod';
 
 export interface Project {
   id: number;
   caseId: string;
   title: string;
   description: string;
+  detailedDescription: string;
   status: string;
+  techStack: string;
+  repoUrl: string;
 }
 
 export interface ExperienceEntry {
@@ -31,8 +35,9 @@ export interface ContactRequest {
 
 @Service()
 export class PortfolioApi {
-     private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:5089/api';
+    private http = inject(HttpClient);
+    private baseUrl = 'http://localhost:5089/api';
+    // private baseUrl = environment.apiUrl;
 
   getProjects() {
     return this.http.get<Project[]>(`${this.baseUrl}/Projects`);

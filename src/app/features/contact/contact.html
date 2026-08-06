@@ -1,4 +1,4 @@
-<section class="contact">
+<!-- <section class="contact">
   <h2 class="contact__heading">Get in touch</h2>
 
   @if (success()) {
@@ -14,7 +14,49 @@
       }
 
       <button type="submit" [disabled]="submitting()">
-        {{ submitting() ? 'sending...' : 'send_message →' }}
+        {{ submitting() ? 'sending...' : 'Send Message →' }}
+      </button>
+    </form>
+  }
+</section> -->
+
+
+<section class="contact">
+  <h2 class="contact__heading">Get in touch</h2>
+
+  @if (success()) {
+    <p class="contact__success">Message sent — I'll get back to you soon.</p>
+  } @else {
+    <form [formGroup]="form" (ngSubmit)="submit()" class="contact__form">
+      <div class="contact__field">
+        <input formControlName="name" placeholder="Your name" />
+        @if (form.controls.name.invalid && form.controls.name.touched) {
+          <p class="contact__field-error">Please enter your name.</p>
+        }
+      </div>
+
+      <div class="contact__field">
+        <input formControlName="email" placeholder="you@example.com" type="email" />
+        @if (form.controls.email.invalid && form.controls.email.touched) {
+          <p class="contact__field-error">
+            {{ form.controls.email.errors?.['required'] ? 'Please enter your email.' : 'Please enter a valid email address.' }}
+          </p>
+        }
+      </div>
+
+      <div class="contact__field">
+        <textarea formControlName="message" placeholder="What would you like to say?" rows="5"></textarea>
+        @if (form.controls.message.invalid && form.controls.message.touched) {
+          <p class="contact__field-error">Please enter a message.</p>
+        }
+      </div>
+
+      @if (error()) {
+        <p class="contact__error">Something went wrong — try again.</p>
+      }
+
+      <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'sending...' : 'Send Message →' }}
       </button>
     </form>
   }

@@ -13,8 +13,18 @@ import { SectionHead } from '../../shared/section-head/section-head';
 })
 
 export class CaseFiles implements OnInit {
+  // private portfolioApi = inject(PortfolioApi);
+  // projects = signal<Project[]>([]);
+
+  // ngOnInit() {
+  //   this.portfolioApi.getProjects().subscribe(projects => {
+  //     this.projects.set(projects);
+  //   });
+  // }
+
   private portfolioApi = inject(PortfolioApi);
   projects = signal<Project[]>([]);
+  expandedId = signal<number | null>(null);
 
   ngOnInit() {
     this.portfolioApi.getProjects().subscribe(projects => {
@@ -22,4 +32,13 @@ export class CaseFiles implements OnInit {
     });
   }
 
+  toggle(id: number): void {
+    this.expandedId.set(this.expandedId() === id ? null : id);
+  }
+
+  techList(techStack: string): string[] {
+    return techStack
+      ? techStack.split(',').map(t => t.trim()).filter(Boolean)
+      : [];
+  }
 }

@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
     <header class="navbar">
-      <div class="navbar__logo">YN</div>
+      <div class="navbar__logo">YH</div>
       <nav class="navbar__pill">
         <a *ngFor="let link of links" [href]="link.href">{{ link.label }}</a>
       </nav>

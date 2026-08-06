@@ -63,3 +63,16 @@
   color: #ff6b6b;
   font-size: 13px;
 }
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contact__field-error {
+  color: #ff6b6b;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  margin: 0;
+}
