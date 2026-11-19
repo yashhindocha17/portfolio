@@ -36,7 +36,7 @@
       </div>
 
       <div class="contact__field">
-        <input formControlName="email" placeholder="you@example.com" type="email" />
+        <input formControlName="email" placeholder="You@example.com" type="email" />
         @if (form.controls.email.invalid && form.controls.email.touched) {
           <p class="contact__field-error">
             {{ form.controls.email.errors?.['required'] ? 'Please enter your email.' : 'Please enter a valid email address.' }}

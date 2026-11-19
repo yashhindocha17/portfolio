@@ -6,15 +6,30 @@
   </div>
 
   <div class="clear-grid">
-    @for (group of groupedSkills(); track group.category) {
-      <div class="clear-card">
-        <div class="cat">{{ group.category }}</div>
-        @for (skill of group.items; track skill.id) {
-          <div class="gauge-row">
-            <span class="gauge-label">{{ skill.name }}</span>
-            <div class="gauge-track">
-              <div class="gauge-fill" [style.width.%]="skill.proficiency"></div>
-            </div>
+    @for (col of columns(); track $index) {
+      <div class="clear-col">
+        @for (group of col; track group.category) {
+          <div class="clear-card">
+            <div class="cat">{{ group.category }}</div>
+            @for (skill of group.items; track skill.id) {
+              <div class="gauge-row">
+                <span class="gauge-label">
+                  @if (skill.icon) {
+                    <img class="skill-icon" [src]="iconUrl(skill.icon)" alt="" width="16" height="16"
+                         loading="lazy" (error)="hideIcon($event)">
+                  } @else {
+                    <span class="skill-icon"></span>
+                  }
+                  <span>{{ skill.name }}</span>
+                </span>
+                <div class="gauge-track">
+                  <div class="gauge-fill" [style.width.%]="skill.proficiency"></div>
+                </div>
+                @if (showPercent) {
+                  <span class="gauge-pct">{{ skill.proficiency }}%</span>
+                }
+              </div>
+            }
           </div>
         }
       </div>

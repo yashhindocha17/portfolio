@@ -38,6 +38,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  align-items: start;
+}
+
+.clear-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .clear-card {
@@ -68,10 +75,21 @@
 }
 
 .gauge-label {
-  width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 170px;
   color: #8B93A1;
   flex-shrink: 0;
   font-family: 'IBM Plex Sans', sans-serif;
+  line-height: 1.3;
+}
+
+.skill-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .gauge-track {
@@ -90,8 +108,25 @@
   transition: width 1s ease;
 }
 
+.gauge-pct {
+  width: 36px;
+  text-align: right;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #525A67;
+}
+
 @media (max-width: 760px) {
   .clear-grid {
     grid-template-columns: 1fr;
+  }
+
+  .clear-col {
+    gap: 16px;
+  }
+
+  .gauge-label {
+    width: 150px;
   }
 }

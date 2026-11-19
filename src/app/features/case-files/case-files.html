@@ -3,21 +3,6 @@
 
   <div class="cases">
     @for (project of projects(); track project.id) {
-      <div class="case">
-        <h3>{{ project.title }}</h3>
-        <p>{{ project.description }}</p> 
-      </div>
-    } @empty {
-      <p>No projects returned.</p>
-    }
-  </div>
-</section> -->
-
-<section class="cases-section">
-  <app-section-head tag="02" title="projects"></app-section-head>
-
-  <div class="cases">
-    @for (project of projects(); track project.id) {
       <div class="case" [class.expanded]="expandedId() === project.id" (click)="toggle(project.id)">
         <h3>{{ project.title }}</h3>
         <p>{{ project.description }}</p>
@@ -50,4 +35,97 @@
       <p>No projects returned.</p>
     }
   </div>
+</section> -->
+
+
+<section class="cases-section">
+  <app-section-head tag="02" title="projects"></app-section-head>
+
+  <div class="cases">
+    @for (project of visible(); track project.id) {
+      <article class="case" tabindex="0" role="button"
+               [attr.aria-label]="'Open details for ' + project.title"
+               (click)="open(project)" (keydown.enter)="open(project)">
+        <div class="case-top">
+          <span class="case-id">{{ project.caseId }}</span>
+          <span class="status" [ngClass]="statusClass(project.status)">{{ statusLabel(project.status) }}</span>
+        </div>
+
+        <h3>{{ project.title }}</h3>
+        <p class="case-desc">{{ project.description }}</p>
+
+        @if (project.resultLine) {
+          <p class="case-result">{{ project.resultLine }}</p>
+        }
+
+        @if (techList(project.techStack).length) {
+          <div class="case-tech">
+            @for (tech of techList(project.techStack); track tech) {
+              <span class="tech-chip">{{ tech }}</span>
+            }
+          </div>
+        }
+
+        <div class="case-foot">
+          <div class="case-links">
+            @if (project.repoUrl) {
+              <a [href]="project.repoUrl" target="_blank" rel="noopener noreferrer" (click)="$event.stopPropagation()">github ↗</a>
+            }
+            @if (project.liveUrl) {
+              <a [href]="project.liveUrl" target="_blank" rel="noopener noreferrer" (click)="$event.stopPropagation()">live site ↗</a>
+            }
+          </div>
+          <span class="case-more">details →</span>
+        </div>
+      </article>
+    } @empty {
+      <p>No projects returned.</p>
+    }
+  </div>
+
+  @if (hiddenCount() > 0) {
+    <button class="show-more" type="button" (click)="toggleAll()">
+      {{ showAll() ? 'show less' : 'show ' + hiddenCount() + ' more' }}
+    </button>
+  }
 </section>
+
+@if (selected(); as p) {
+  <div class="modal-backdrop" (click)="close()">
+    <div class="modal" role="dialog" aria-modal="true" [attr.aria-label]="p.title" (click)="$event.stopPropagation()">
+      <button class="modal-close" type="button" (click)="close()" aria-label="Close">×</button>
+
+      <div class="case-top">
+        <span class="case-id">{{ p.caseId }}</span>
+        <span class="status" [ngClass]="statusClass(p.status)">{{ statusLabel(p.status) }}</span>
+      </div>
+
+      <h3 class="modal-title">{{ p.title }}</h3>
+
+      @if (p.resultLine) {
+        <p class="case-result">{{ p.resultLine }}</p>
+      }
+
+      @for (para of paragraphs(p.detailedDescription); track $index) {
+        <p class="case-detail-text">{{ para }}</p>
+      }
+
+      @if (techList(p.techStack).length) {
+        <div class="case-tech">
+          @for (tech of techList(p.techStack); track tech) {
+            <span class="tech-chip">{{ tech }}</span>
+          }
+        </div>
+      }
+
+      <div class="case-links">
+        @if (p.repoUrl) {
+          <a [href]="p.repoUrl" target="_blank" rel="noopener noreferrer">github ↗</a>
+        }
+        @if (p.liveUrl) {
+          <a [href]="p.liveUrl" target="_blank" rel="noopener noreferrer">live site ↗</a>
+        }
+      </div>
+    </div>
+  </div>
+}

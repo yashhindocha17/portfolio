@@ -11,13 +11,28 @@ export interface Project {
   status: string;
   techStack: string;
   repoUrl: string;
+  sortOrder: number;
+  resultLine: string;
+  liveUrl: string;
 }
 
-export interface ExperienceEntry {
+// export interface ExperienceEntry {
+//   id: number;
+//   dateRange: string;
+//   title: string;
+//   description: string;
+// }
+
+export interface Experience {
   id: number;
   dateRange: string;
   title: string;
   description: string;
+  category: string;       // 'experience' | 'education' | 'certification'
+  organization: string;
+  details: string;        // bullet points separated by new lines
+  techStack: string;      // comma-separated
+  startDate: string;
 }
 
 export interface Skill {
@@ -25,6 +40,7 @@ export interface Skill {
   category: string;
   name: string;
   proficiency: number;
+  icon: string;
 }
 
 export interface ContactRequest {
@@ -44,7 +60,7 @@ export class PortfolioApi {
   }
 
   getExperience() {
-    return this.http.get<ExperienceEntry[]>(`${this.baseUrl}/Experience`);
+    return this.http.get<Experience[]>(`${this.baseUrl}/Experience`);
   }
 
   getSkills() {

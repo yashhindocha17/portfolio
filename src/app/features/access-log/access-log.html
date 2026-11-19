@@ -1,11 +1,42 @@
 <section class="access-log">
   <app-section-head tag="01" title="experience & education"></app-section-head>
 
-  @for (entry of entries(); track entry.id) {
-    <div class="log-line">
-      <div class="log-ts">{{ entry.dateRange }}</div>
-      <div class="log-body"><b>{{ entry.title }}</b> — {{ entry.description }}</div>
-    </div>
+  @for (group of groups(); track group.key) {
+    <h3 class="group-title">{{ group.label }}</h3>
+
+    @for (entry of group.items; track entry.id) {
+      <div class="log-line">
+        <div class="log-ts">{{ entry.dateRange }}</div>
+        <div class="log-body">
+          <div class="log-head">
+            <b>{{ entry.title }}</b>
+            @if (entry.organization) {
+              <span class="org"> · {{ entry.organization }}</span>
+            }
+          </div>
+
+          @if (entry.description) {
+            <p class="desc">{{ entry.description }}</p>
+          }
+
+          @if (entry.bullets.length) {
+            <ul class="bullets">
+              @for (b of entry.bullets; track $index) {
+                <li>{{ b }}</li>
+              }
+            </ul>
+          }
+
+          @if (entry.tags.length) {
+            <div class="tags">
+              @for (t of entry.tags; track t) {
+                <span class="tag">{{ t }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    }
   } @empty {
     <p>No experience entries returned.</p>
   }
